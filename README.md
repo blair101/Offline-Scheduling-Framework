@@ -1,10 +1,6 @@
-# Flexible Task Scheduling Microframework
+# Flexible Task Scheduling Framework
 
 > 大数据离线分析模块开发Demo
-
-日期 | 版本 | 说明 | 修改人员 | 确认人员
-:--- | :-- |:--- | :-- |:--- 
-2017-12-15 | 4.0 | yyyy-mm-dd | Blair Chan | Blair Chan 
 
 ## 目标
 
@@ -102,7 +98,7 @@ drwxr-xr-x   8 blair  staff   256B Dec 15 14:04 util
     
 + 1). 变量命名􏰂
 
-   ```
+```
    自有变量采用小写􏰀. export出的环境变量采用大写􏰁
      hive 表命名 : 
       1. 原始数据表，数据挖掘团队建立的 则 采用命名方式为 ods_dm (original data stream, data_mining)开头
@@ -112,7 +108,7 @@ drwxr-xr-x   8 blair  staff   256B Dec 15 14:04 util
    
 + 2). 配置文件 (conf目录下)
 
-   ```
+```
    default.conf􏰂 配置公共参数􏰂程序路径􏰄hadoop 用户等􏰁
    vars.conf    配置任务参数􏰂 hive表名􏰄参数设置, 以及其他变量等􏰁
    alert.conf􏰂   配置邮件报警接收人􏰁 
@@ -120,7 +116,7 @@ drwxr-xr-x   8 blair  staff   256B Dec 15 14:04 util
         
 + 3). 输入输出
 
-   ```
+```
    1. 如果存在输入源多种数据格式(rcfile+lzo+textfile)的情况􏰀推荐采用生成临时的统一格式的数据表的方式处理􏰁 
    2. hive 表 输出原则上均采用rcfile格式􏰁。
          (当然现在存储便宜，所以很多时候为了操作方便，也可采用text格式存储，但仍然推荐ods层面表统一为rcfile格式)
@@ -129,7 +125,7 @@ drwxr-xr-x   8 blair  staff   256B Dec 15 14:04 util
 
 + 4). hive 建表示例.
 
-   ```bash
+```bash
 table_name="${table_ods_e_coupon}"
 hql="create external table if not exists ${table_name}
 (
@@ -146,14 +142,12 @@ echo "$hql"
 ${HIVE} -e "$hql"
 ```
  
-  说明
+ 说明
 
-  ```
-  1. 推荐百万级以上记录的 hive 表建立时指定分区，一般string dt=yyyy-mm-dd  
-  2. 数据量不大，又不是按照天增加很多数据量的表，则不需要指定分区   
-  3. 分区 string dt 一般建议为 yyyy-MM-dd 格式  (dt 取自 : date, 默认意思为数据产生日期)
-  4. hive 建表时指定格式，列与列之间分隔符
-  5. ${hive_dir}, mds 表为 bucket_name/data_mining/dm/mds/ 
+``` 
+  1. 分区 string dt 一般建议为 yyyy-MM-dd 格式  (dt 取自 : date, 默认意思为数据产生日期)
+  2. hive 建表时指定格式，列与列之间分隔符
+  3. ${hive_dir}, mds 表为 bucket_name/data_mining/dm/mds/ 
                     ods 表为 bucket_name/data_mining/dm/ods/
                             bucket名称 + 部门或大项目组名称 + 团队名称 + 层级       
 ```
